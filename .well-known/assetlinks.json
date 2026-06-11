@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.mapsearch",
+      "sha256_cert_fingerprints": [
+        "C1:35:21:7C:CD:81:DF:64:A3:C5:A6:60:6F:8F:9D:B9:E3:D0:C3:2F:6C:F9:47:D3:19:B6:C3:3B:2D:DF:B7:82"
+      ]
+    }
+  }
+]
