@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在開啟 MapSearch...</title>
+    <!-- Material Design 3 (M3) 樣式模擬 -->
+    <style>
+        :root { --md-sys-color-primary: #6750A4; --md-sys-color-on-primary: #FFFFFF; --md-sys-color-surface: #FEF7FF; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--md-sys-color-surface); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; color: #1D1B20; }
+        .card { background: #FFFFFF; padding: 2rem; border-radius: 28px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; max-width: 80%; }
+        .btn { background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: 500; display: inline-block; margin-top: 20px; transition: box-shadow 0.2s; }
+        .btn:active { box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--md-sys-color-primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>正在開啟 MapSearch</h2>
+        <div class="loader"></div>
+        <p>如果 App 沒有自動開啟，請點擊下方按鈕</p>
+        <a id="app-link" href="#" class="btn">開啟應用程式</a>
+    </div>
+
+    <script>
+        // 1. 取得當前的路徑與參數 (例如: /collaborate?noteId=xxx)
+        const currentPath = window.location.pathname;
+        const currentSearch = window.location.search;
+        
+        // 2. 轉換為自定義 Scheme (例如: mapsearch://collaborate?noteId=xxx)
+        // 去除路徑開頭的斜線
+        const cleanPath = currentPath.startsWith('/') ? currentPath.substring(1) : currentPath;
+        const deepLink = "mapsearch://" + cleanPath + currentSearch;
+
+        // 3. 更新按鈕連結
+        document.getElementById('app-link').href = deepLink;
+
+        // 4. 自動嘗試跳轉 (這在大多數瀏覽器中有效)
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = deepLink;
+            }, 500);
+        };
+    </script>
+</body>
+</html>
